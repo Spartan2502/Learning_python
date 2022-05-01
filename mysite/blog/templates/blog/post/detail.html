@@ -6,4 +6,55 @@
     Published {{ post.publish }} by {{ post.author }}
 </p>
 {{ post.body|linebreaks }}
+
+<p>
+    <a href="{% url "blog:post_share" post.id %}">
+    Share this post
+    </a>
+</p>
+
+<!--  
+    Este bloque de codigo se usa para saber cuantos comentarios tiene el post 
+with se usa  para evitar golpear la base de datos o acceder a métodos costosos varias veces. 
+pluralize se usa para mostrar un sufijo plural para la palabra "comentario"
+-->
+{% with comments.count as total_comments %}
+ <h2>
+ {{ total_comments }} comentario{{ total_comments|pluralize }}
+ </h2>
+{% endwith %}
+
+<!-- 
+    listar  comentarios
+    -usamos for para recorrer todos los comentarios 
+    -usamos forloop.counter para ver el numero del comentario 
+    -usamos comment.name|created|body donde comment es la variable que contiene los datos del comentario actual
+    -
+ -->
+ {% for comment in comments %}
+    <div class="comment">
+    <p class="info">
+        Comment {{ forloop.counter }} by {{ comment.name }}
+        {{ comment.created }}
+    </p>
+    {{ comment.body|linebreaks }}
+    </div>
+{% empty %}
+    <p>There are no comments yet.</p>
+{% endfor %}
+
+<!-- 
+form para comentar
+aqui revisa si el objeto new_comment existe si es asi muestra un mensaje de exito sino muestra el form para comentar 
+ -->
+ {% if new_comment %}
+    <h2>Your comment has been added.</h2>
+{% else %}
+    <h2>Add a new comment</h2>
+    <form method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Add comment"></p>
+ </form>
+{% endif %}
 {% endblock %}

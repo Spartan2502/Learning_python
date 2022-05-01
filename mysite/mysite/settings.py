@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -124,3 +125,25 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+#using SMTP mail server
+#EMAIL_HOST: The SMTP server host; the default is localhost
+#EMAIL_PORT: The SMTP port; the default is 25
+#EMAIL_HOST_USER: The username for the SMTP server
+#EMAIL_HOST_PASSWORD: The password for the SMTP server
+#EMAIL_USE_TLS: Whether to use a Transport Layer Security (TLS) secure
+#connection
+#EMAIL_USE_SSL: Whether to use an implicit TLS secure connection
+
+#SMTP gmail server
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = 'your_account@gmail.com'
+#EMAIL_HOST_PASSWORD = 'your_password
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+
