@@ -47,6 +47,7 @@ class Post(models.Model):
                              self.publish.day, self.slug])
 
 
+
 #comments model 
 class Comment(models.Model):
     post = models.ForeignKey(Post,
